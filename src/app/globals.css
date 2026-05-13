@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:        #0a0a0f;
+  --bg-card:   #14141d;
+  --bg-elev:   #1c1c2a;
+  --gold:      #fbbf24;
+  --gold-dim:  #d4a017;
+  --red:       #dc2626;
+  --text:      #ffffff;
+  --text-mute: #9ca3af;
+  --border:    #2a2a3a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+* { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+  color: var(--text);
 }
+
+::selection { background: var(--gold); color: var(--bg); }
+
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-card); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+/* seat map */
+.seat {
+  width: 28px; height: 28px;
+  border-radius: 6px 6px 4px 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.seat.standard { background: #2a2a3a; color: #6b7280; border: 1px solid #3a3a4a; }
+.seat.vip      { background: #4c1d95; color: #c4b5fd; border: 1px solid #6d28d9; }
+.seat.couple   { background: #be185d; color: #fbcfe8; border: 1px solid #db2777; }
+.seat.standard:hover { background: #fbbf24; color: #0a0a0f; transform: scale(1.1); }
+.seat.vip:hover      { background: #fbbf24; color: #0a0a0f; transform: scale(1.1); }
+.seat.couple:hover   { background: #fbbf24; color: #0a0a0f; transform: scale(1.1); }
+.seat.selected { background: #fbbf24 !important; color: #0a0a0f !important; transform: scale(1.05); border-color: #fbbf24 !important; }
+.seat.taken    { background: #1a1a24 !important; color: #4b5563 !important; cursor: not-allowed; opacity: 0.4; transform: none !important; }
